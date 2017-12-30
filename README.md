@@ -13,3 +13,5 @@ be quicker
 
 
 Then push the `_site` folder to the gh-pages branch
+
+Extra information on doing this from scratch can be found [on this StackOverflow question](https://stackoverflow.com/questions/28249255/how-do-i-configure-github-to-use-non-supported-jekyll-site-plugins/28252200#28252200)
