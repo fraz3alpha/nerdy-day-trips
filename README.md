@@ -1,1 +1,1 @@
-# nerdy-day-trips
+# Nerdy Day Trips!
