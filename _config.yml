@@ -18,7 +18,7 @@ email: andrewtaylor2@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   Discover nerdy places to visit with 'The Map'! Find out about each
   place with a post full of useful information
-baseurl: "" # the subpath of your site, e.g. /blog
+baseurl: "/nerdy-day-trips" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: jekyllrb
 github_username:  jekyll
