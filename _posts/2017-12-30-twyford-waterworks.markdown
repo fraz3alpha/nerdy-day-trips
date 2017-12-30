@@ -10,6 +10,9 @@ location:
 place_links:
   wikipedia: ""
   url: https://www.twyfordwaterworks.co.uk/
+cost: £
+indoor: True
+outdoor: True
 ---
 Twyford Waterworks is awesome!
 

@@ -10,6 +10,8 @@ location:
 place_links:
   wikipedia: ""
   url: https://museum.rcsed.ac.uk
+cost: Free
+indoor: True
 ---
 The Surgeon's Hall Museum is awesome!
 
