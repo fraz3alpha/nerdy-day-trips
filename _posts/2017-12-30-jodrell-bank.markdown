@@ -2,6 +2,7 @@
 layout: post
 title:  "Jodrell Bank Observatory"
 date:   2017-12-30 13:40:00 +0000
+permalink: /jodrell-bank-observatory/
 categories: science astronomy
 location:
   latitude: 53.2369304

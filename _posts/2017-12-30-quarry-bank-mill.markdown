@@ -2,6 +2,7 @@
 layout: post
 title:  "Quarry Bank Mill"
 date:   2017-12-30 14:46:00 +0000
+permalink: /quarry-bank-mill/
 categories: war
 location:
   latitude: 53.3436872

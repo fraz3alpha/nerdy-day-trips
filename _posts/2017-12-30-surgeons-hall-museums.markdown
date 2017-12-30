@@ -1,7 +1,8 @@
 ---
 layout: post
-title:  "Surgeon's Hall Museum"
+title:  "Surgeon's Hall Museums"
 date:   2017-12-30 14:51:00 +0000
+permalink: /surgeons-hall-museums/
 categories: science biology
 location:
   latitude: 55.94667
