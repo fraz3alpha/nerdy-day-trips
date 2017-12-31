@@ -24,6 +24,8 @@ twitter_username: fraz3alpha
 github_username:  fraz3alpha
 github_repository:  nerdy-day-trips
 
+permalink: /:title/
+
 # Build settings
 markdown: kramdown
 theme: minima

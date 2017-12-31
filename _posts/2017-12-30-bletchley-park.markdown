@@ -2,7 +2,7 @@
 layout: post
 title:  "Bletchley Park"
 date:   2017-12-30 14:43:00 +0000
-permalink: /bletchley-park/
+permalink: /:title/
 categories: war
 location:
   latitude: 51.9976597

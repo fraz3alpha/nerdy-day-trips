@@ -2,7 +2,6 @@
 layout: post
 title:  "Museum of Science and Industry"
 date:   2017-12-30 22:12:00 +0000
-permalink: /museum-of-science-and-industry/
 categories: science industry
 location:
   latitude: 53.4773135

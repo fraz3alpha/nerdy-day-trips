@@ -2,7 +2,6 @@
 layout: post
 title:  "Twyford Waterworks"
 date:   2017-12-30 16:41:00 +0000
-permalink: /twyford-waterworks/
 categories: infrastructure
 location:
   latitude: 51.0212084

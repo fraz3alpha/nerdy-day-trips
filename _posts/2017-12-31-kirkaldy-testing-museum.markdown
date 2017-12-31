@@ -2,7 +2,6 @@
 layout: post
 title:  "Kirkaldy Testing Museum"
 date:   2017-12-31 13:38:00 +0000
-permalink: /kirkaldy-testing-museum/
 categories: industry
 location:
   latitude: 51.505996
