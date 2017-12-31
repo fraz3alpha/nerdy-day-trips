@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Pencil Museum"
+title:  "Derwent Pencil Museum"
 date:   2017-12-31 20:29:00 +0000
 categories: industry
 location:
@@ -10,6 +10,6 @@ place_links:
   wikipedia: ""
   url: https://www.derwentart.com/en/gb/7523/derwent-pencil-museum
 ---
-The Pencil Museum is awesome, but was closed due to flooding when I was nearby!
+The Derwent Pencil Museum is awesome, but was closed due to flooding when I was nearby!
 
 {% google_map zoom="16" %}
