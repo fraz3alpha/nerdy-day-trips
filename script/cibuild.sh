@@ -1,4 +1,7 @@
-#!/usr/bin/env bash -e
+#!/usr/bin/env bash
+
+# Enable exit on failure
+set -e
 
 # based on https://jekyllrb.com/docs/continuous-integration/travis-ci/
 
