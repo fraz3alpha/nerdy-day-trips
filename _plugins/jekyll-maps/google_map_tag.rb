@@ -2,7 +2,7 @@ module Jekyll
   module Maps
     class GoogleMapTag < Liquid::Tag
       JS_LIB_NAME        = "jekyllMaps".freeze
-      DEFAULT_MAP_WIDTH  = 600
+      DEFAULT_MAP_WIDTH  = "100%"
       DEFAULT_MAP_HEIGHT = 400
 
       def initialize(_, args, _)
