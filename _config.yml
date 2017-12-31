@@ -30,10 +30,11 @@ permalink: /post/:title/
 paginate: 10
 paginate_path: "/archive/page:num/"
 
-# header_pages:
-#   - /about/index.html
-#   - /archive/index.html
-#   - /map/index.html
+header_pages:
+  - map.md
+  - archive/index.html
+  - contribute.md
+  - about.md
 
 # Build settings
 markdown: kramdown
