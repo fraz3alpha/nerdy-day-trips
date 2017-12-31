@@ -4,9 +4,14 @@ module Jekyll
       def initialize(options)
         @documents = []
         @options = options
+        @baseurl = nil
       end
 
       def find(site, page)
+
+        # Stash the site baseurl for later use
+        @baseurl = site.config['baseurl']
+
         if @options[:attributes][:latitude] && @options[:attributes][:longitude]
           return [location_from_options(page)]
         elsif @options[:filters].empty?
@@ -25,7 +30,7 @@ module Jekyll
           :latitude  => @options[:attributes][:latitude],
           :longitude => @options[:attributes][:longitude],
           :title     => @options[:attributes][:marker_title] || page["title"],
-          :url       => @options[:attributes][:marker_url] || fetch_url(page),
+          :url       => @options[:attributes][:marker_url] || @baseurl + fetch_url(page),
           :image     => @options[:attributes][:marker_img] || page["image"] || ""
         }
       end
@@ -103,7 +108,7 @@ module Jekyll
           :latitude  => location["latitude"],
           :longitude => location["longitude"],
           :title     => location["title"] || document["title"],
-          :url       => location["url"] || fetch_url(document),
+          :url       => location["url"] || @baseurl + fetch_url(document),
           :image     => location["image"] || document["image"] || ""
         }
       end
