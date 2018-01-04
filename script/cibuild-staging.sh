@@ -12,10 +12,12 @@ SITE_DIR=_site
 # Clear out the build directory
 rm -rf ${SITE_DIR} && mkdir ${SITE_DIR}
 
-# Fiddle around with some files that have our baseurl in them so that it
-# works for the staging environment
-sed -i -e 's/nerdy-day-trips/nerdy-day-trips-staging/' _plugins/jekyll-maps/google_map_tag.rb
-sed -i -e 's/\"\/nerdy-day-trips\"/\"\/nerdy-day-trips-staging\"/' _config.yml
+# Fiddle around with some files so that it works for the staging environment
+# Overwrite the CNAME file
+echo "staging.nerdy-day-trips.com" > CNAME
+# Adjust the url file
+sed -i -e 's/https:\/\/www.nerdy-day-trips.com/https:\/\/staging.nerdy-day-trips.com/' _config.yml
+sed -i -e 's/title: Nerdy Day Trips/title: Nerdy Day Trips - Staging/' _config.yml
 
 # Build the site
 bundle exec jekyll build
