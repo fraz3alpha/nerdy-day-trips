@@ -12,4 +12,4 @@ Jodrell Bank is awesome!
 
 {% google_map zoom="16" %}
 
-Find out more at [Wikipedia/Jodrell_Bank_Observator](https://en.wikipedia.org/wiki/Jodrell_Bank_Observatory)
+Find out more at [Wikipedia/Jodrell_Bank_Observatory](https://en.wikipedia.org/wiki/Jodrell_Bank_Observatory)
