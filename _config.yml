@@ -16,8 +16,8 @@ name                     : "Andy Taylor"
 description              : >- # this means to ignore newlines
   Discover nerdy places to visit with 'The Map'! Find out about each
   place with a post full of useful information
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://www.nerdy-day-trips.com" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl                  : "" # the subpath of your site, e.g. /blog
+url                      :  "https://www.nerdy-day-trips.com" # the base hostname & protocol for your site, e.g. http://example.com
 repository               : fraz3alpha/nerdy-day-trips
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 # breadcrumbs            : false # true, false (default)
