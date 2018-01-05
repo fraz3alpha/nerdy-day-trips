@@ -5,10 +5,13 @@ rvm:
 
 before_script:
  - chmod +x ./script/cibuild.sh # or do this locally and commit
+ - chmod +x ./script/cibuild-staging.sh # or do this locally and commit
 
 # Assume bundler is being used, therefore
 # the `install` step will run `bundle install` by default.
-script: ./script/cibuild.sh
+script:
+   - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then bash ./script/cibuild-staging.sh; fi'
+   - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then bash ./script/cibuild.sh; fi'
 
 # branch whitelist, only for GitHub Pages - we push raw code to master,
 # the build code goes to gh-pages

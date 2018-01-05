@@ -55,7 +55,7 @@ HTML
       private
       def map_options
         opts = {
-          :baseUrl         => '/nerdy-day-trips',
+          :baseUrl         => '',
           :useCluster      => !@args[:flags][:no_cluster],
           :showMarker      => @args[:attributes][:show_marker] != "false",
           :showMarkerPopup => @args[:attributes][:show_popup] != "false"
