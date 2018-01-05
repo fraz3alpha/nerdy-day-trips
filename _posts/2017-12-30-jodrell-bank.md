@@ -1,5 +1,4 @@
 ---
-layout: post
 title:  "Jodrell Bank Observatory"
 date:   2017-12-30 13:40:00 +0000
 categories: science astronomy

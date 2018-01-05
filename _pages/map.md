@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title:  "The Map!"
 permalink: /map/
 ---

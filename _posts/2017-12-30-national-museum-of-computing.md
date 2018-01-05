@@ -1,5 +1,4 @@
 ---
-layout: post
 title:  "National Museum of Computing"
 date:   2017-12-30 14:51:00 +0000
 categories: war computing
