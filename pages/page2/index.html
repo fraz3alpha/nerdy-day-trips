@@ -1,0 +1,654 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.8.1 by Michael Rose
+  Copyright 2017 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>Nerdy Day Trips - Page 2</title>
+
+
+
+
+<meta name="description" content="Discover nerdy places to visit with ‘The Map’! Find out about each place with a post full of useful information">
+
+
+
+
+<meta name="author" content="Your Name">
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="Nerdy Day Trips">
+<meta property="og:title" content="Nerdy Day Trips">
+
+
+  <link rel="canonical" href="https://www.nerdy-day-trips.com/pages/page2/">
+  <meta property="og:url" content="https://www.nerdy-day-trips.com/pages/page2/">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <meta name="twitter:site" content="@fraz3alpha">
+  <meta name="twitter:title" content="Nerdy Day Trips">
+  <meta name="twitter:description" content="Discover nerdy places to visit with ‘The Map’! Find out about each place with a post full of useful information">
+  <meta name="twitter:url" content="https://www.nerdy-day-trips.com/pages/page2/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://www.nerdy-day-trips.com/assets/images/bio-photo.jpg">
+    
+  
+
+  
+    <meta name="twitter:creator" content="@Your Name">
+  
+
+
+
+  
+
+  
+
+
+
+  <meta property="og:image" content="https://www.nerdy-day-trips.com/assets/images/bio-photo.jpg">
+
+
+
+
+
+  <link rel="prev" href="https://www.nerdy-day-trips.com/">
+
+
+  <link rel="next" href="https://www.nerdy-day-trips.com/pages/page3/">
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://www.nerdy-day-trips.com",
+      "logo": "https://www.nerdy-day-trips.com/assets/images/bio-photo.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Andy Taylor",
+      "url" : "https://www.nerdy-day-trips.com",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end SEO -->
+
+
+<link href="https://www.nerdy-day-trips.com/feed.xml" type="application/atom+xml" rel="alternate" title="Nerdy Day Trips Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://www.nerdy-day-trips.com/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+  <script type='text/javascript'>
+  /* global google */
+/* global MarkerClusterer */
+// eslint-disable-next-line no-unused-vars
+var jekyllMaps = (function() {
+  'use strict'
+  var clusterSettings = {}
+  var clusterReady = false
+  var mapReady = false
+  var options = {}
+  var data = []
+  var maps = []
+
+  return {
+    initializeMap: initializeMap,
+    initializeCluster: initializeCluster,
+    register: register
+  }
+
+  /**
+   * Setup Google Maps options and call renderer.
+   */
+  function initializeMap() {
+    options = {
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      center: new google.maps.LatLng(0, 0)
+    }
+    mapReady = true
+    render()
+  }
+
+  /**
+   * Register map data to be rendered once Google Maps API is loaded.
+   *
+   * @param string id
+   * @param Array locations
+   * @param Object settings
+   */
+  function register(id, locations, options) {
+    data.push({ id: id, locations: locations, options: options })
+    render()
+  }
+
+  /**
+   * Render maps data if Google Maps API is loaded.
+   */
+  function render() {
+    if (!mapReady) return
+
+    while (data.length > 0) {
+      var item = data.pop()
+      var bounds = new google.maps.LatLngBounds()
+      var mapOptions = Object.assign({}, options, item.options)
+      var map = new google.maps.Map(
+        document.getElementById(item.id),
+        mapOptions
+      )
+      var infoWindow = new google.maps.InfoWindow()
+      var markers = item.locations.map(createMarker)
+
+      map.fitBounds(bounds)
+      google.maps.event.addListenerOnce(map, 'bounds_changed', function() {
+        if (this.customZoom) this.setZoom(this.customZoom)
+      })
+      if (mapOptions.useCluster) {
+        maps.push({ map: map, markers: markers })
+        processCluster()
+      }
+    }
+
+    function createMarker(location) {
+      var position = new google.maps.LatLng(
+        location.latitude,
+        location.longitude
+      )
+      bounds.extend(position)
+      if (!mapOptions.showMarker) return false
+
+      var marker = new google.maps.Marker({
+        position: position,
+        title: location.title,
+        image: location.image,
+        url: location.url.length > 0 ? mapOptions.baseUrl + location.url : '',
+        map: map
+      })
+      if (mapOptions.showMarkerPopup) marker.addListener('click', markerPopup)
+
+      return marker
+    }
+
+    function markerPopup() {
+      var contentHtml =
+        '<div class="map-info-window"><h5>' + this.title + '</h5>'
+      var imageHtml = '<img src="' + this.image + '" alt="' + this.title + '"/>'
+      if (this.url.length > 0) {
+        var linkText = this.image.length > 0 ? imageHtml : 'View'
+        contentHtml += '<a href="' + this.url + '">' + linkText + '</a></div>'
+      } else if (this.image.length > 0) {
+        contentHtml += imageHtml
+      }
+      infoWindow.setContent(contentHtml)
+      infoWindow.open(map, this)
+    }
+  }
+
+  function initializeCluster(settings) {
+    clusterReady = true
+    clusterSettings = settings || {}
+    processCluster()
+  }
+
+  function processCluster() {
+    if (!clusterReady) return
+
+    while (maps.length > 0) {
+      var obj = maps.pop()
+      // eslint-disable-next-line no-new
+      new MarkerClusterer(obj.map, obj.markers, {
+        gridSize: clusterSettings.grid_size || 25,
+        imagePath:
+          'https://cdn.rawgit.com/googlemaps/js-marker-clusterer/gh-pages/images/m'
+      })
+    }
+  }
+})()
+/* Object.assign polyfill */
+if (typeof Object.assign !== 'function') {
+  Object.assign = function(target) {
+    'use strict'
+    if (target == null) {
+      throw new TypeError('Cannot convert undefined or null to object')
+    }
+
+    target = Object(target)
+    for (var index = 1; index < arguments.length; index++) {
+      var source = arguments[index]
+      if (source != null) {
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key]
+          }
+        }
+      }
+    }
+    return target
+  }
+}
+
+</script>
+<script async defer src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDpzcqEib1x7gismxOxPx0gDuQ1gR6CDmo&callback=jekyllMaps.initializeMap'></script>
+
+<script async defer src='https://cdn.rawgit.com/googlemaps/js-marker-clusterer/gh-pages/src/markerclusterer.js'
+        onload='jekyllMaps.initializeCluster({})'></script>
+
+</head>
+
+  <body class="layout--home">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="https://www.nerdy-day-trips.com/">Nerdy Day Trips</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://www.nerdy-day-trips.com/map/" >The Map!</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://www.nerdy-day-trips.com/about/" >About</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://www.nerdy-day-trips.com/archive/" >Archive</a>
+            </li>
+          
+        </ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle Menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">Navigation</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="https://www.nerdy-day-trips.com/" class="">Home</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="https://www.nerdy-day-trips.com/map/" class="">The Map</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="https://www.nerdy-day-trips.com/about/" class="">About</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="https://www.nerdy-day-trips.com/contribute/" class="">Contribute</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+    
+  
+  </div>
+
+
+  <div class="archive">
+    
+      <h1 class="page__title"></h1>
+    
+    <div id='c5ae4742-990c-45d6-9f66-0185ae8e1c96' style='width:600px;height:400px;'></div>
+<script type='text/javascript'>
+  jekyllMaps.register(
+    'c5ae4742-990c-45d6-9f66-0185ae8e1c96',
+    [{"latitude":53.2369304,"longitude":-2.3080747,"title":"Jodrell Bank Observatory","url":"/posts/jodrell-bank/","image":""},{"latitude":54.285616,"longitude":-2.965864,"title":"Stott Park Bobbin Mill","url":"/posts/stott-park-bobbin-mill/","image":""},{"latitude":51.5000416,"longitude":-0.1175899,"title":"Florence Nightingale Museum","url":"/posts/florence-nightingale-museum/","image":""},{"latitude":51.9976597,"longitude":-0.7406863,"title":"Bletchley Park","url":"/posts/bletchley-park/","image":""},{"latitude":53.3436872,"longitude":-2.2500936,"title":"Quarry Bank Mill","url":"/posts/quarry-bank-mill/","image":""},{"latitude":51.9984682,"longitude":-0.7438704,"title":"National Museum of Computing","url":"/posts/national-museum-of-computing/","image":""},{"latitude":55.94667,"longitude":-3.184731,"title":"Surgeon's Hall Museums","url":"/posts/surgeons-hall-museums/","image":""},{"latitude":51.0212084,"longitude":-1.2990775,"title":"Twyford Waterworks","url":"/posts/twyford-waterworks/","image":""},{"latitude":53.4773135,"longitude":-2.2549624,"title":"Museum of Science and Industry","url":"/posts/museum-of-science-and-industry/","image":""},{"latitude":51.505996,"longitude":-0.1015026,"title":"Kirkaldy Testing Museum","url":"/posts/kirkaldy-testing-museum/","image":""},{"latitude":54.604013,"longitude":-3.141746,"title":"Derwent Pencil Museum","url":"/posts/derwent-pencil-museum/","image":""}],
+    {"baseUrl":"","useCluster":true,"showMarker":true,"showMarkerPopup":true}
+  );
+</script>
+
+
+<h3 class="archive__subtitle">Recent Posts</h3>
+
+<!-- Only list one page of posts, don't give a navigation bar at the bottom -->
+
+  
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://www.nerdy-day-trips.com/posts/national-museum-of-computing/" rel="permalink">National Museum of Computing
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">The National Museum of Computing is awesome!
+
+</p>
+  </article>
+</div>
+
+  
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://www.nerdy-day-trips.com/posts/quarry-bank-mill/" rel="permalink">Quarry Bank Mill
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Quarry Bank Mill is awesome!
+
+</p>
+  </article>
+</div>
+
+  
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://www.nerdy-day-trips.com/posts/bletchley-park/" rel="permalink">Bletchley Park
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Bletchley Park is awesome!
+
+</p>
+  </article>
+</div>
+
+  
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://www.nerdy-day-trips.com/posts/florence-nightingale-museum/" rel="permalink">Florence Nightingale Museum
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">The Florence Nightingale Museum is awesome!
+
+</p>
+  </article>
+</div>
+
+  
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://www.nerdy-day-trips.com/posts/stott-park-bobbin-mill/" rel="permalink">Stott Park Bobbin Mill
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Stott Park Bobbin Mill is awesome!
+
+</p>
+  </article>
+</div>
+
+
+
+<nav class="pagination">
+  
+  <ul>
+    
+    
+      
+        <li><a href="https://www.nerdy-day-trips.com/pages/">Previous</a></li>
+      
+    
+
+    
+    
+      <li><a href="https://www.nerdy-day-trips.com/pages/">1</a></li>
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+        <li><a href="https://www.nerdy-day-trips.com/pages/page2/" class="disabled current">2</a></li>
+      
+    
+
+    
+    
+
+    
+      <li><a href="https://www.nerdy-day-trips.com/pages/page3/">3</a></li>
+    
+
+    
+    
+      <li><a href="https://www.nerdy-day-trips.com/pages/page3/">Next</a></li>
+    
+  </ul>
+</nav>
+
+
+
+  </div>
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+  <input type="text" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  <div id="results" class="results"></div>
+</div>
+      </div>
+    
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/fraz3alpha"><i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+    
+    
+    <li><a href="https://www.nerdy-day-trips.com/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2018 Andy Taylor. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="https://www.nerdy-day-trips.com/assets/js/main.min.js"></script>
+
+
+
+  <script src="https://www.nerdy-day-trips.com/assets/js/lunr.min.js"></script>
+  <script src="https://www.nerdy-day-trips.com/assets/js/lunr-en.js"></script>
+
+
+
+
+
+
+  </body>
+</html>

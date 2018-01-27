@@ -1,0 +1,245 @@
+<script type='text/javascript'>
+  /* global google */
+/* global MarkerClusterer */
+// eslint-disable-next-line no-unused-vars
+var jekyllMaps = (function() {
+  'use strict'
+  var clusterSettings = {}
+  var clusterReady = false
+  var mapReady = false
+  var options = {}
+  var data = []
+  var maps = []
+
+  return {
+    initializeMap: initializeMap,
+    initializeCluster: initializeCluster,
+    register: register
+  }
+
+  /**
+   * Setup Google Maps options and call renderer.
+   */
+  function initializeMap() {
+    options = {
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      center: new google.maps.LatLng(0, 0)
+    }
+    mapReady = true
+    render()
+  }
+
+  /**
+   * Register map data to be rendered once Google Maps API is loaded.
+   *
+   * @param string id
+   * @param Array locations
+   * @param Object settings
+   */
+  function register(id, locations, options) {
+    data.push({ id: id, locations: locations, options: options })
+    render()
+  }
+
+  /**
+   * Render maps data if Google Maps API is loaded.
+   */
+  function render() {
+    if (!mapReady) return
+
+    while (data.length > 0) {
+      var item = data.pop()
+      var bounds = new google.maps.LatLngBounds()
+      var mapOptions = Object.assign({}, options, item.options)
+      var map = new google.maps.Map(
+        document.getElementById(item.id),
+        mapOptions
+      )
+      var infoWindow = new google.maps.InfoWindow()
+      var markers = item.locations.map(createMarker)
+
+      map.fitBounds(bounds)
+      google.maps.event.addListenerOnce(map, 'bounds_changed', function() {
+        if (this.customZoom) this.setZoom(this.customZoom)
+      })
+      if (mapOptions.useCluster) {
+        maps.push({ map: map, markers: markers })
+        processCluster()
+      }
+    }
+
+    function createMarker(location) {
+      var position = new google.maps.LatLng(
+        location.latitude,
+        location.longitude
+      )
+      bounds.extend(position)
+      if (!mapOptions.showMarker) return false
+
+      var marker = new google.maps.Marker({
+        position: position,
+        title: location.title,
+        image: location.image,
+        url: location.url.length > 0 ? mapOptions.baseUrl + location.url : '',
+        map: map
+      })
+      if (mapOptions.showMarkerPopup) marker.addListener('click', markerPopup)
+
+      return marker
+    }
+
+    function markerPopup() {
+      var contentHtml =
+        '<div class="map-info-window"><h5>' + this.title + '</h5>'
+      var imageHtml = '<img src="' + this.image + '" alt="' + this.title + '"/>'
+      if (this.url.length > 0) {
+        var linkText = this.image.length > 0 ? imageHtml : 'View'
+        contentHtml += '<a href="' + this.url + '">' + linkText + '</a></div>'
+      } else if (this.image.length > 0) {
+        contentHtml += imageHtml
+      }
+      infoWindow.setContent(contentHtml)
+      infoWindow.open(map, this)
+    }
+  }
+
+  function initializeCluster(settings) {
+    clusterReady = true
+    clusterSettings = settings || {}
+    processCluster()
+  }
+
+  function processCluster() {
+    if (!clusterReady) return
+
+    while (maps.length > 0) {
+      var obj = maps.pop()
+      // eslint-disable-next-line no-new
+      new MarkerClusterer(obj.map, obj.markers, {
+        gridSize: clusterSettings.grid_size || 25,
+        imagePath:
+          'https://cdn.rawgit.com/googlemaps/js-marker-clusterer/gh-pages/images/m'
+      })
+    }
+  }
+})()
+/* Object.assign polyfill */
+if (typeof Object.assign !== 'function') {
+  Object.assign = function(target) {
+    'use strict'
+    if (target == null) {
+      throw new TypeError('Cannot convert undefined or null to object')
+    }
+
+    target = Object(target)
+    for (var index = 1; index < arguments.length; index++) {
+      var source = arguments[index]
+      if (source != null) {
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key]
+          }
+        }
+      }
+    }
+    return target
+  }
+}
+
+</script>
+<script async defer src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDpzcqEib1x7gismxOxPx0gDuQ1gR6CDmo&callback=jekyllMaps.initializeMap'></script>
+
+<script async defer src='https://cdn.rawgit.com/googlemaps/js-marker-clusterer/gh-pages/src/markerclusterer.js'
+        onload='jekyllMaps.initializeCluster({})'></script>
+
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="https://www.nerdy-day-trips.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.nerdy-day-trips.com/" rel="alternate" type="text/html" /><updated>2018-01-27T21:58:12+00:00</updated><id>https://www.nerdy-day-trips.com/</id><title type="html">Nerdy Day Trips</title><subtitle>Discover nerdy places to visit with 'The Map'! Find out about each place with a post full of useful information</subtitle><author><name>Your Name</name></author><entry><title type="html">Derwent Pencil Museum</title><link href="https://www.nerdy-day-trips.com/posts/derwent-pencil-museum/" rel="alternate" type="text/html" title="Derwent Pencil Museum" /><published>2017-12-31T20:29:00+00:00</published><updated>2017-12-31T20:29:00+00:00</updated><id>https://www.nerdy-day-trips.com/posts/derwent-pencil-museum</id><content type="html" xml:base="https://www.nerdy-day-trips.com/posts/derwent-pencil-museum/">&lt;p&gt;The Derwent Pencil Museum is awesome, but was closed due to flooding when I was nearby!&lt;/p&gt;
+
+&lt;div id=&quot;25f5a3ee-5edb-40a3-93c9-04a6037a6a18&quot; style=&quot;width:600px;height:400px;&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  jekyllMaps.register(
+    '25f5a3ee-5edb-40a3-93c9-04a6037a6a18',
+    [{&quot;latitude&quot;:54.604013,&quot;longitude&quot;:-3.141746,&quot;title&quot;:&quot;Derwent Pencil Museum&quot;,&quot;url&quot;:&quot;/posts/derwent-pencil-museum/&quot;,&quot;image&quot;:&quot;&quot;}],
+    {&quot;baseUrl&quot;:&quot;&quot;,&quot;useCluster&quot;:true,&quot;showMarker&quot;:true,&quot;showMarkerPopup&quot;:true,&quot;customZoom&quot;:16}
+  );
+&lt;/script&gt;</content><author><name>Your Name</name></author><summary type="html">The Derwent Pencil Museum is awesome, but was closed due to flooding when I was nearby!</summary></entry><entry><title type="html">Kirkaldy Testing Museum</title><link href="https://www.nerdy-day-trips.com/posts/kirkaldy-testing-museum/" rel="alternate" type="text/html" title="Kirkaldy Testing Museum" /><published>2017-12-31T13:38:00+00:00</published><updated>2017-12-31T13:38:00+00:00</updated><id>https://www.nerdy-day-trips.com/posts/kirkaldy-testing-museum</id><content type="html" xml:base="https://www.nerdy-day-trips.com/posts/kirkaldy-testing-museum/">&lt;p&gt;The Kirkaldy Testing Museum is awesome, but isn’t open very often!&lt;/p&gt;
+
+&lt;div id=&quot;12d8cab0-b9e0-4432-abe1-d61e1630af9d&quot; style=&quot;width:600px;height:400px;&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  jekyllMaps.register(
+    '12d8cab0-b9e0-4432-abe1-d61e1630af9d',
+    [{&quot;latitude&quot;:51.505996,&quot;longitude&quot;:-0.1015026,&quot;title&quot;:&quot;Kirkaldy Testing Museum&quot;,&quot;url&quot;:&quot;/posts/kirkaldy-testing-museum/&quot;,&quot;image&quot;:&quot;&quot;}],
+    {&quot;baseUrl&quot;:&quot;&quot;,&quot;useCluster&quot;:true,&quot;showMarker&quot;:true,&quot;showMarkerPopup&quot;:true,&quot;customZoom&quot;:16}
+  );
+&lt;/script&gt;</content><author><name>Your Name</name></author><summary type="html">The Kirkaldy Testing Museum is awesome, but isn’t open very often!</summary></entry><entry><title type="html">Museum of Science and Industry</title><link href="https://www.nerdy-day-trips.com/posts/museum-of-science-and-industry/" rel="alternate" type="text/html" title="Museum of Science and Industry" /><published>2017-12-30T22:12:00+00:00</published><updated>2017-12-30T22:12:00+00:00</updated><id>https://www.nerdy-day-trips.com/posts/museum-of-science-and-industry</id><content type="html" xml:base="https://www.nerdy-day-trips.com/posts/museum-of-science-and-industry/">&lt;p&gt;The Museum of Science and Industry is awesome!&lt;/p&gt;
+
+&lt;div id=&quot;ebe81a59-f436-48ff-b9de-4d3ad2af8bc2&quot; style=&quot;width:600px;height:400px;&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  jekyllMaps.register(
+    'ebe81a59-f436-48ff-b9de-4d3ad2af8bc2',
+    [{&quot;latitude&quot;:53.4773135,&quot;longitude&quot;:-2.2549624,&quot;title&quot;:&quot;Museum of Science and Industry&quot;,&quot;url&quot;:&quot;/posts/museum-of-science-and-industry/&quot;,&quot;image&quot;:&quot;&quot;}],
+    {&quot;baseUrl&quot;:&quot;&quot;,&quot;useCluster&quot;:true,&quot;showMarker&quot;:true,&quot;showMarkerPopup&quot;:true,&quot;customZoom&quot;:16}
+  );
+&lt;/script&gt;</content><author><name>Your Name</name></author><summary type="html">The Museum of Science and Industry is awesome!</summary></entry><entry><title type="html">Twyford Waterworks</title><link href="https://www.nerdy-day-trips.com/posts/twyford-waterworks/" rel="alternate" type="text/html" title="Twyford Waterworks" /><published>2017-12-30T16:41:00+00:00</published><updated>2017-12-30T16:41:00+00:00</updated><id>https://www.nerdy-day-trips.com/posts/twyford-waterworks</id><content type="html" xml:base="https://www.nerdy-day-trips.com/posts/twyford-waterworks/">&lt;p&gt;Twyford Waterworks is awesome!&lt;/p&gt;
+
+&lt;div id=&quot;654a4e08-9d96-4020-b2fd-64a43e7c2e7b&quot; style=&quot;width:600px;height:400px;&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  jekyllMaps.register(
+    '654a4e08-9d96-4020-b2fd-64a43e7c2e7b',
+    [{&quot;latitude&quot;:51.0212084,&quot;longitude&quot;:-1.2990775,&quot;title&quot;:&quot;Twyford Waterworks&quot;,&quot;url&quot;:&quot;/posts/twyford-waterworks/&quot;,&quot;image&quot;:&quot;&quot;}],
+    {&quot;baseUrl&quot;:&quot;&quot;,&quot;useCluster&quot;:true,&quot;showMarker&quot;:true,&quot;showMarkerPopup&quot;:true,&quot;customZoom&quot;:16}
+  );
+&lt;/script&gt;</content><author><name>Your Name</name></author><summary type="html">Twyford Waterworks is awesome!</summary></entry><entry><title type="html">Surgeon’s Hall Museums</title><link href="https://www.nerdy-day-trips.com/posts/surgeons-hall-museums/" rel="alternate" type="text/html" title="Surgeon's Hall Museums" /><published>2017-12-30T14:51:00+00:00</published><updated>2017-12-30T14:51:00+00:00</updated><id>https://www.nerdy-day-trips.com/posts/surgeons-hall-museums</id><content type="html" xml:base="https://www.nerdy-day-trips.com/posts/surgeons-hall-museums/">&lt;p&gt;The Surgeon’s Hall Museum is awesome!&lt;/p&gt;
+
+&lt;div id=&quot;d739d0b6-c18e-4ee0-a1a9-a5b261c2e109&quot; style=&quot;width:600px;height:400px;&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  jekyllMaps.register(
+    'd739d0b6-c18e-4ee0-a1a9-a5b261c2e109',
+    [{&quot;latitude&quot;:55.94667,&quot;longitude&quot;:-3.184731,&quot;title&quot;:&quot;Surgeon's Hall Museums&quot;,&quot;url&quot;:&quot;/posts/surgeons-hall-museums/&quot;,&quot;image&quot;:&quot;&quot;}],
+    {&quot;baseUrl&quot;:&quot;&quot;,&quot;useCluster&quot;:true,&quot;showMarker&quot;:true,&quot;showMarkerPopup&quot;:true,&quot;customZoom&quot;:16}
+  );
+&lt;/script&gt;</content><author><name>Your Name</name></author><summary type="html">The Surgeon’s Hall Museum is awesome!</summary></entry><entry><title type="html">National Museum of Computing</title><link href="https://www.nerdy-day-trips.com/posts/national-museum-of-computing/" rel="alternate" type="text/html" title="National Museum of Computing" /><published>2017-12-30T14:51:00+00:00</published><updated>2017-12-30T14:51:00+00:00</updated><id>https://www.nerdy-day-trips.com/posts/national-museum-of-computing</id><content type="html" xml:base="https://www.nerdy-day-trips.com/posts/national-museum-of-computing/">&lt;p&gt;The National Museum of Computing is awesome!&lt;/p&gt;
+
+&lt;div id=&quot;1a23bcb7-962a-4734-8c22-deb1d18d16e6&quot; style=&quot;width:600px;height:400px;&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  jekyllMaps.register(
+    '1a23bcb7-962a-4734-8c22-deb1d18d16e6',
+    [{&quot;latitude&quot;:51.9984682,&quot;longitude&quot;:-0.7438704,&quot;title&quot;:&quot;National Museum of Computing&quot;,&quot;url&quot;:&quot;/posts/national-museum-of-computing/&quot;,&quot;image&quot;:&quot;&quot;}],
+    {&quot;baseUrl&quot;:&quot;&quot;,&quot;useCluster&quot;:true,&quot;showMarker&quot;:true,&quot;showMarkerPopup&quot;:true,&quot;customZoom&quot;:16}
+  );
+&lt;/script&gt;</content><author><name>Your Name</name></author><summary type="html">The National Museum of Computing is awesome!</summary></entry><entry><title type="html">Quarry Bank Mill</title><link href="https://www.nerdy-day-trips.com/posts/quarry-bank-mill/" rel="alternate" type="text/html" title="Quarry Bank Mill" /><published>2017-12-30T14:46:00+00:00</published><updated>2017-12-30T14:46:00+00:00</updated><id>https://www.nerdy-day-trips.com/posts/quarry-bank-mill</id><content type="html" xml:base="https://www.nerdy-day-trips.com/posts/quarry-bank-mill/">&lt;p&gt;Quarry Bank Mill is awesome!&lt;/p&gt;
+
+&lt;div id=&quot;783b64a3-1c20-411d-a095-ec747c0a4a37&quot; style=&quot;width:600px;height:400px;&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  jekyllMaps.register(
+    '783b64a3-1c20-411d-a095-ec747c0a4a37',
+    [{&quot;latitude&quot;:53.3436872,&quot;longitude&quot;:-2.2500936,&quot;title&quot;:&quot;Quarry Bank Mill&quot;,&quot;url&quot;:&quot;/posts/quarry-bank-mill/&quot;,&quot;image&quot;:&quot;&quot;}],
+    {&quot;baseUrl&quot;:&quot;&quot;,&quot;useCluster&quot;:true,&quot;showMarker&quot;:true,&quot;showMarkerPopup&quot;:true,&quot;customZoom&quot;:16}
+  );
+&lt;/script&gt;</content><author><name>Your Name</name></author><summary type="html">Quarry Bank Mill is awesome!</summary></entry><entry><title type="html">Bletchley Park</title><link href="https://www.nerdy-day-trips.com/posts/bletchley-park/" rel="alternate" type="text/html" title="Bletchley Park" /><published>2017-12-30T14:43:00+00:00</published><updated>2017-12-30T14:43:00+00:00</updated><id>https://www.nerdy-day-trips.com/posts/bletchley-park</id><content type="html" xml:base="https://www.nerdy-day-trips.com/posts/bletchley-park/">&lt;p&gt;Bletchley Park is awesome!&lt;/p&gt;
+
+&lt;div id=&quot;c1e49861-7b14-4006-bad0-313a7bfc17a3&quot; style=&quot;width:600px;height:400px;&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  jekyllMaps.register(
+    'c1e49861-7b14-4006-bad0-313a7bfc17a3',
+    [{&quot;latitude&quot;:51.9976597,&quot;longitude&quot;:-0.7406863,&quot;title&quot;:&quot;Bletchley Park&quot;,&quot;url&quot;:&quot;/posts/bletchley-park/&quot;,&quot;image&quot;:&quot;&quot;}],
+    {&quot;baseUrl&quot;:&quot;&quot;,&quot;useCluster&quot;:true,&quot;showMarker&quot;:true,&quot;showMarkerPopup&quot;:true,&quot;customZoom&quot;:16}
+  );
+&lt;/script&gt;</content><author><name>Your Name</name></author><category term="county:northamptonshire" /><category term="country:gb" /><summary type="html">Bletchley Park is awesome!</summary></entry><entry><title type="html">Florence Nightingale Museum</title><link href="https://www.nerdy-day-trips.com/posts/florence-nightingale-museum/" rel="alternate" type="text/html" title="Florence Nightingale Museum" /><published>2017-12-30T14:39:00+00:00</published><updated>2017-12-30T14:39:00+00:00</updated><id>https://www.nerdy-day-trips.com/posts/florence-nightingale-museum</id><content type="html" xml:base="https://www.nerdy-day-trips.com/posts/florence-nightingale-museum/">&lt;p&gt;The Florence Nightingale Museum is awesome!&lt;/p&gt;
+
+&lt;div id=&quot;03c114c3-75d7-45cb-b9f7-f515f4b5e6d5&quot; style=&quot;width:600px;height:400px;&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  jekyllMaps.register(
+    '03c114c3-75d7-45cb-b9f7-f515f4b5e6d5',
+    [{&quot;latitude&quot;:51.5000416,&quot;longitude&quot;:-0.1175899,&quot;title&quot;:&quot;Florence Nightingale Museum&quot;,&quot;url&quot;:&quot;/posts/florence-nightingale-museum/&quot;,&quot;image&quot;:&quot;&quot;}],
+    {&quot;baseUrl&quot;:&quot;&quot;,&quot;useCluster&quot;:true,&quot;showMarker&quot;:true,&quot;showMarkerPopup&quot;:true,&quot;customZoom&quot;:16}
+  );
+&lt;/script&gt;</content><author><name>Your Name</name></author><summary type="html">The Florence Nightingale Museum is awesome!</summary></entry><entry><title type="html">Stott Park Bobbin Mill</title><link href="https://www.nerdy-day-trips.com/posts/stott-park-bobbin-mill/" rel="alternate" type="text/html" title="Stott Park Bobbin Mill" /><published>2017-12-30T14:35:00+00:00</published><updated>2017-12-30T14:35:00+00:00</updated><id>https://www.nerdy-day-trips.com/posts/stott-park-bobbin-mill</id><content type="html" xml:base="https://www.nerdy-day-trips.com/posts/stott-park-bobbin-mill/">&lt;p&gt;Stott Park Bobbin Mill is awesome!&lt;/p&gt;
+
+&lt;div id=&quot;9246e531-1bfe-4d0d-89cf-85cfefa1397f&quot; style=&quot;width:600px;height:400px;&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  jekyllMaps.register(
+    '9246e531-1bfe-4d0d-89cf-85cfefa1397f',
+    [{&quot;latitude&quot;:54.285616,&quot;longitude&quot;:-2.965864,&quot;title&quot;:&quot;Stott Park Bobbin Mill&quot;,&quot;url&quot;:&quot;/posts/stott-park-bobbin-mill/&quot;,&quot;image&quot;:&quot;&quot;}],
+    {&quot;baseUrl&quot;:&quot;&quot;,&quot;useCluster&quot;:true,&quot;showMarker&quot;:true,&quot;showMarkerPopup&quot;:true,&quot;customZoom&quot;:16}
+  );
+&lt;/script&gt;</content><author><name>Your Name</name></author><summary type="html">Stott Park Bobbin Mill is awesome!</summary></entry></feed>
