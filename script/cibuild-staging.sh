@@ -22,6 +22,9 @@ sed -i -e 's/Nerdy Day Trips/Nerdy Day Trips - Staging/' _config.yml
 # Build the site
 bundle exec jekyll build
 
+# Print summary
+echo "Built site, total size: `du -sh ${SITE_DIR}`"
+
 # Initialise the git repo
 cd ${SITE_DIR}
 # Add a file to say that the site doesn't need building
