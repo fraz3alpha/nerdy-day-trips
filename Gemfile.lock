@@ -37,6 +37,8 @@ GEM
       jekyll (~> 3.3)
     jekyll-gist (1.5.0)
       octokit (~> 4.2)
+    jekyll-maps (2.1.1)
+      jekyll (~> 3.0)
     jekyll-paginate (1.1.0)
     jekyll-sass-converter (1.5.1)
       sass (~> 3.4)
@@ -98,6 +100,7 @@ PLATFORMS
 DEPENDENCIES
   jekyll (~> 3.6.2)
   jekyll-feed (~> 0.6)
+  jekyll-maps (~> 2.1.0)
   jekyll-paginate
   minimal-mistakes-jekyll
 
