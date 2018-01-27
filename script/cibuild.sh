@@ -13,6 +13,9 @@ rm -rf ${SITE_DIR} && mkdir ${SITE_DIR}
 # Build the site
 bundle exec jekyll build
 
+# Print summary
+echo "Built site, total size: `du -sh ${SITE_DIR}`"
+
 # Initialise the git repo
 #cd ${SITE_DIR}
 #git init
