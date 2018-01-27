@@ -1,5 +1,4 @@
 ---
-layout: post
 title:  "Derwent Pencil Museum"
 date:   2017-12-31 20:29:00 +0000
 categories: industry

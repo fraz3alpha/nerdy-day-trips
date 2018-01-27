@@ -17,7 +17,7 @@ rm -rf ${SITE_DIR} && mkdir ${SITE_DIR}
 echo "staging.nerdy-day-trips.com" > CNAME
 # Adjust the url file
 sed -i -e 's/https:\/\/www.nerdy-day-trips.com/https:\/\/staging.nerdy-day-trips.com/' _config.yml
-sed -i -e 's/title: Nerdy Day Trips/title: Nerdy Day Trips - Staging/' _config.yml
+sed -i -e 's/Nerdy Day Trips/Nerdy Day Trips - Staging/' _config.yml
 
 # Build the site
 bundle exec jekyll build

@@ -1,5 +1,4 @@
 ---
-layout: post
 title:  "Surgeon's Hall Museums"
 date:   2017-12-30 14:51:00 +0000
 categories: science biology

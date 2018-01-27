@@ -1,0 +1,20 @@
+# main links
+main:
+  - title: "The Map!"
+    url: /map/
+  - title: "About"
+    url: /about/
+  - title: "Archive"
+    url: /archive/
+
+navi:
+  - title: Navigation
+    children:
+      - title: Home
+        url: /
+      - title: The Map
+        url: /map/
+      - title: About
+        url: /about/
+      - title: Contribute
+        url: /contribute/

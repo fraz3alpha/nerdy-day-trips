@@ -1,5 +1,4 @@
 ---
-layout: post
 title:  "Quarry Bank Mill"
 date:   2017-12-30 14:46:00 +0000
 categories: war

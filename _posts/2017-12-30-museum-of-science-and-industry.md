@@ -1,5 +1,4 @@
 ---
-layout: post
 title:  "Museum of Science and Industry"
 date:   2017-12-30 22:12:00 +0000
 categories: science industry

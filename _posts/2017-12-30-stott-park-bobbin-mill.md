@@ -1,5 +1,4 @@
 ---
-layout: post
 title:  "Stott Park Bobbin Mill"
 date:   2017-12-30 14:35:00 +0000
 categories: industry
