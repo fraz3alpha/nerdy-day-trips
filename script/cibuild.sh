@@ -17,6 +17,8 @@ bundle exec jekyll build
 
 # Print summary
 echo "Built site, total size: `du -sh ${SITE_DIR}`"
+# Check links
+bundle exec htmlproofer --internal-domains "nerdy-day-trips.com" ./_site
 
 # Initialise the git repo
 cd ${SITE_DIR}

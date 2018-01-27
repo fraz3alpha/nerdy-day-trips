@@ -18,3 +18,14 @@ navi:
         url: /about/
       - title: Contribute
         url: /contribute/
+
+  - title: Posts
+    children:
+      - title: Recent
+        url: /
+      - title: By Category
+        url: /categories/
+      - title: By Tag
+        url: /tags/
+      - title: Archive
+        url: /archive/
