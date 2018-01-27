@@ -6,6 +6,7 @@ layout: archive
 
 <h3 class="archive__subtitle">{{ site.data.ui-text[site.locale].recent_posts | default: "Recent Posts" }}</h3>
 
+<!-- Only list one page of posts, don't give a navigation bar at the bottom -->
 {% for post in paginator.posts %}
   {% include archive-single.html %}
 {% endfor %}

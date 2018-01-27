@@ -6,11 +6,15 @@ main:
     url: /about/
   - title: "Archive"
     url: /archive/
-  # - title: "About"
-  #   url: https://mmistakes.github.io/minimal-mistakes/about/
-  # - title: "Sample Posts"
-  #   url: /year-archive/
-  # - title: "Sample Collections"
-  #   url: /collection-archive/
-  # - title: "Sitemap"
-  #   url: /sitemap/
+
+navi:
+  - title: Navigation
+    children:
+      - title: Home
+        url: /
+      - title: The Map
+        url: /map/
+      - title: About
+        url: /about/
+      - title: Contribute
+        url: /contribute/
