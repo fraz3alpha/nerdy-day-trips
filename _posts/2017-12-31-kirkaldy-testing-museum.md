@@ -11,4 +11,4 @@ place_links:
 ---
 The Kirkaldy Testing Museum is awesome, but isn't open very often!
 
-{% google_map zoom="16" %}
+{% openstreetmap zoom="16" %}

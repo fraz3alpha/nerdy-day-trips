@@ -240,16 +240,16 @@ compress_html:
 
 
 # Collections
-collections:
-  recipes:
-    output: true
-    permalink: /:collection/:path/
-  pets:
-    output: true
-    permalink: /:collection/:path/
-  portfolio:
-    output: true
-    permalink: /:collection/:path/
+# collections:
+#   recipes:
+#     output: true
+#     permalink: /:collection/:path/
+#   pets:
+#     output: true
+#     permalink: /:collection/:path/
+#   portfolio:
+#     output: true
+#     permalink: /:collection/:path/
 
 
 # Defaults

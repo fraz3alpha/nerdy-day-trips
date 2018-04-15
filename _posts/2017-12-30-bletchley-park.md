@@ -15,4 +15,4 @@ place_links:
 ---
 Bletchley Park is awesome!
 
-{% google_map zoom="16" %}
+{% openstreetmap zoom="16" %}

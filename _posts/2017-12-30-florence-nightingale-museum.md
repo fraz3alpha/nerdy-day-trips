@@ -11,4 +11,4 @@ place_links:
 ---
 The Florence Nightingale Museum is awesome!
 
-{% google_map zoom="16" %}
+{% openstreetmap zoom="16" %}
