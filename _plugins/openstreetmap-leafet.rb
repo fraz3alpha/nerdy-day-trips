@@ -54,14 +54,6 @@ ICON
 
         puts map_icons.join("\n")
 
-        # // Add the marker for this place
-        # var iconFeature = new ol.Feature({
-        #   geometry: new
-        #     ol.geom.Point(ol.proj.transform([#{lon}, #{lat}], 'EPSG:4326',   'EPSG:3857')),
-        #   name: 'This Place',
-        # });
-        # vectorSource.addFeature(iconFeature);
-
         # Do not indent the text otherwise Jekyll will parse it as a block of code
         # The string ""class="openstreetmap-map"" must appear as that is what
         # we look for later to add in the required scripts
@@ -75,6 +67,21 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 map.addControl(new L.Control.Fullscreen());
+
+var geocoder = L.Control.geocoder({
+        defaultMarkGeocode: false
+    })
+    .on('markgeocode', function(e) {
+        var bbox = e.geocode.bbox;
+        var poly = L.polygon([
+             bbox.getSouthEast(),
+             bbox.getNorthEast(),
+             bbox.getNorthWest(),
+             bbox.getSouthWest()
+        ])
+        map.fitBounds(poly.getBounds());
+    })
+    .addTo(map);
 
 var markers = L.markerClusterGroup();
 #{map_icons.join("\n")}
@@ -102,6 +109,8 @@ MAP_HTML
           head.add_child('<link rel="stylesheet" href="/css/MarkerCluster.css" />')
           head.add_child('<link rel="stylesheet" href="/css/MarkerCluster.Default.css" />')
           head.add_child('<script src="/js/leaflet.markercluster.js"></script>')
+          head.add_child('<link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />')
+          head.add_child('<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>')
         end
 
         # Format the Nokogiri object back into a string
