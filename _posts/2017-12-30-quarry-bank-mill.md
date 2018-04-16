@@ -11,4 +11,4 @@ place_links:
 ---
 Quarry Bank Mill is awesome!
 
-{% google_map zoom="16" %}
+{% openstreetmap_leaflet zoom="16" %}

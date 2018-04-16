@@ -12,4 +12,4 @@ cost: ££
 ---
 The Museum of Science and Industry is awesome!
 
-{% google_map zoom="16" %}
+{% openstreetmap_leaflet zoom="16" %}

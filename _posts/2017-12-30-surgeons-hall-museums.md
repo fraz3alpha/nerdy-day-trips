@@ -13,4 +13,4 @@ indoor: True
 ---
 The Surgeon's Hall Museum is awesome!
 
-{% google_map zoom="16" %}
+{% openstreetmap_leaflet zoom="16" %}

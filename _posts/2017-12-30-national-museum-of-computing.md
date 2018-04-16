@@ -11,4 +11,4 @@ place_links:
 ---
 The National Museum of Computing is awesome!
 
-{% google_map zoom="16" %}
+{% openstreetmap_leaflet zoom="16" %}
