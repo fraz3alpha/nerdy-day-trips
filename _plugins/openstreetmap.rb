@@ -49,8 +49,7 @@ module Jekyll
 
           map_icons << <<ICON
 vectorSource.addFeature(new ol.Feature({
-  geometry: new
-    ol.geom.Point(ol.proj.transform([#{lon}, #{lat}], 'EPSG:4326', 'EPSG:3857')),
+  geometry: new ol.geom.Point(ol.proj.transform([#{lon}, #{lat}], 'EPSG:4326', 'EPSG:3857')),
   name: 'Some Place',
 }));
 ICON
