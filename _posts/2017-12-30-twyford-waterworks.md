@@ -14,4 +14,4 @@ outdoor: True
 ---
 Twyford Waterworks is awesome!
 
-{% google_map zoom="16" %}
+{% openstreetmap_leaflet zoom="16" %}

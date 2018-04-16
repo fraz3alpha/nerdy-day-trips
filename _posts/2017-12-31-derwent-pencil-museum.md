@@ -11,4 +11,4 @@ place_links:
 ---
 The Derwent Pencil Museum is awesome, but was closed due to flooding when I was nearby!
 
-{% google_map zoom="16" %}
+{% openstreetmap_leaflet zoom="16" %}
